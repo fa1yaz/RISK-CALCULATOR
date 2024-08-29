@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OWASP Risk Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@600&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <div class="dashboard">
+        <nav class="sidebar">
+            <h2>OWASP Risk Dashboard</h2>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#risk-calculator">Risk Calculator</a></li>
+                <li><a href="#vulnerability-types">Vulnerability Types</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            <section id="overview">
+                <h2>Overview</h2>
+                <p>Welcome to the OWASP Risk Dashboard. Use the tools provided to assess and manage security risks.</p>
+            </section>
+
+            <section id="risk-calculator">
+                <h2>Risk Calculator</h2>
+                <form id="risk-form">
+                    <div class="form-group">
+                        <label for="vulnerability-type">Vulnerability Type:</label>
+                        <select id="vulnerability-type" name="vulnerability-type" required>
+                            <option value="" disabled selected>Select Vulnerability Type</option>
+                            <option value="Injection">Injection</option>
+                            <option value="Broken Authentication">Broken Authentication</option>
+                            <option value="Sensitive Data Exposure">Sensitive Data Exposure</option>
+                            <option value="XML External Entities">XML External Entities (XXE)</option>
+                            <option value="Broken Access Control">Broken Access Control</option>
+                            <option value="Security Misconfiguration">Security Misconfiguration</option>
+                            <option value="Cross-Site Scripting">Cross-Site Scripting (XSS)</option>
+                            <option value="Insecure Deserialization">Insecure Deserialization</option>
+                            <option value="Using Components with Known Vulnerabilities">Using Components with Known Vulnerabilities</option>
+                            <option value="Insufficient Logging and Monitoring">Insufficient Logging and Monitoring</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="threat-agent">Threat Agent Factor (Likelihood):</label>
+                        <select id="threat-agent" name="threat-agent" required>
+                            <option value="" disabled selected>Select Threat Agent</option>
+                            <option value="1">Very Low</option>
+                            <option value="2">Low</option>
+                            <option value="3">Medium</option>
+                            <option value="4">High</option>
+                            <option value="5">Very High</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vulnerability">Vulnerability Factor (Likelihood):</label>
+                        <select id="vulnerability" name="vulnerability" required>
+                            <option value="" disabled selected>Select Vulnerability</option>
+                            <option value="1">Very Low</option>
+                            <option value="2">Low</option>
+                            <option value="3">Medium</option>
+                            <option value="4">High</option>
+                            <option value="5">Very High</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="technical-impact">Technical Impact:</label>
+                        <select id="technical-impact" name="technical-impact" required>
+                            <option value="" disabled selected>Select Technical Impact</option>
+                            <option value="1">Very Low</option>
+                            <option value="2">Low</option>
+                            <option value="3">Medium</option>
+                            <option value="4">High</option>
+                            <option value="5">Very High</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="business-impact">Business Impact:</label>
+                        <select id="business-impact" name="business-impact" required>
+                            <option value="" disabled selected>Select Business Impact</option>
+                            <option value="1">Very Low</option>
+                            <option value="2">Low</option>
+                            <option value="3">Medium</option>
+                            <option value="4">High</option>
+                            <option value="5">Very High</option>
+                        </select>
+                    </div>
+
+                    <div class="buttons">
+                        <button type="button" id="generate-report-button">Generate Report</button>
+                    </div>
+                </form>
+
+                <div id="result" class="result">
+                    <h3>Risk Level: <span id="risk-level">-</span></h3>
+                    <p id="risk-description"></p>
+                </div>
+
+                <div class="reset-section">
+                    <button type="button" id="reset-button">Reset</button>
+                </div>
+            </section>
+
+            <section id="vulnerability-types">
+                <h2>Vulnerability Types</h2>
+                <ul id="vulnerability-list">
+                    <!-- Vulnerability items will be dynamically added here -->
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
