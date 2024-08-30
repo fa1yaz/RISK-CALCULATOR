@@ -7,9 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const riskDescriptionElement = document.getElementById('risk-description');
     const resetButton = document.getElementById('reset-button');
     const generateReportButton = document.getElementById('generate-report-button');
-    const reportOutput = document.getElementById('report-output');
-    const vulnerabilityList = document.getElementById('vulnerability-list');
-    const sidebar = document.querySelector('.sidebar');
+    const reportContainer = document.createElement('div'); // Container for the report
+    reportContainer.id = 'report-output';
+    document.querySelector('.content').appendChild(reportContainer);
 
     const vulnerabilities = [
         { name: 'Injection', description: 'Injection flaws occur when untrusted data is sent to an interpreter as part of a command or query. This can include SQL, NoSQL, OS, and LDAP injections.' },
@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     function populateVulnerabilityList() {
+        const vulnerabilityList = document.getElementById('vulnerability-list');
         vulnerabilityList.innerHTML = '';
         vulnerabilities.forEach(vulnerability => {
             const li = document.createElement('li');
@@ -49,22 +50,22 @@ document.addEventListener('DOMContentLoaded', function() {
         const likelihood = (threatAgent + vulnerability) / 2;
         const impact = (technicalImpact + businessImpact) / 2;
         const riskLevel = likelihood * impact;
-        const { text, className, description } = calculateRiskText(riskLevel);
+        const { text, className, description, emoji } = calculateRiskText(riskLevel);
 
-        riskLevelElement.textContent = text;
+        riskLevelElement.textContent = `${text} ${emoji}`;
         riskLevelElement.className = className;
         riskDescriptionElement.textContent = description;
     }
 
     function calculateRiskText(riskLevel) {
         if (riskLevel <= 5) {
-            return { text: 'Low', className: 'low', description: 'Low risk. Continue monitoring.' };
+            return { text: 'Low', className: 'low', description: 'Low risk. Continue monitoring.', emoji: '😊' };
         } else if (riskLevel <= 10) {
-            return { text: 'Medium', className: 'medium', description: 'Medium risk. Mitigation recommended.' };
+            return { text: 'Medium', className: 'medium', description: 'Medium risk. Mitigation recommended.', emoji: '😐' };
         } else if (riskLevel <= 15) {
-            return { text: 'High', className: 'high', description: 'High risk. Immediate action required.' };
+            return { text: 'High', className: 'high', description: 'High risk. Immediate action required.', emoji: '😟' };
         } else {
-            return { text: 'Critical', className: 'critical', description: 'Critical risk. Urgent remediation needed.' };
+            return { text: 'Critical', className: 'critical', description: 'Critical risk. Urgent remediation needed.', emoji: '😨' };
         }
     }
 
@@ -73,10 +74,11 @@ document.addEventListener('DOMContentLoaded', function() {
         riskLevelElement.textContent = '-';
         riskDescriptionElement.textContent = '';
         riskLevelElement.className = '';
+        reportContainer.innerHTML = ''; // Clear the report when reset
     }
 
     function generateReport() {
-        const report = `
+        reportContainer.innerHTML = `
             <h3>Risk Report</h3>
             <p><strong>Vulnerability Type:</strong> ${document.getElementById('vulnerability-type').value}</p>
             <p><strong>Threat Agent:</strong> ${threatAgentElement.value}</p>
@@ -86,7 +88,11 @@ document.addEventListener('DOMContentLoaded', function() {
             <p><strong>Risk Level:</strong> ${riskLevelElement.textContent}</p>
             <p>${riskDescriptionElement.textContent}</p>
         `;
-        reportOutput.innerHTML = report;
+        reportContainer.style.backgroundColor = '#2C2C2C'; /* Dark background */
+        reportContainer.style.padding = '15px';
+        reportContainer.style.marginTop = '20px';
+        reportContainer.style.borderRadius = '5px';
+        reportContainer.style.color = '#ECECEC'; /* Light text */
     }
 
     populateVulnerabilityList();
