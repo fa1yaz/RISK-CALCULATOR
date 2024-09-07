@@ -3,27 +3,28 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     height: 100vh;
-    background-color: #1B1B1B; /* Dark background */
-    color: #ECECEC; /* Light text color */
-    overflow: hidden;
+    background-color: #1B1B1B;
+    color: #ECECEC;
     display: flex;
+    flex-direction: column; /* Stack everything vertically by default */
 }
 
 .dashboard {
     display: flex;
+    flex-direction: column; /* Ensure column layout for small screens */
     width: 100%;
     height: 100%;
 }
 
 .sidebar {
-    width: 250px;
-    background-color: #2C2C2C; /* Slightly lighter dark background */
+    width: 100%;
+    background-color: #2C2C2C;
     color: #ECECEC;
     padding: 20px;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
-    position: fixed;
-    height: 100%;
-    box-sizing: border-box; /* Ensure padding is within the box */
+    box-shadow: none;
+    position: relative;
+    height: auto; /* Auto height for sidebar on small screens */
+    box-sizing: border-box;
 }
 
 .sidebar h2 {
@@ -39,7 +40,7 @@ body {
 }
 
 .sidebar ul li {
-    margin: 20px 0;
+    margin: 10px 0;
 }
 
 .sidebar ul li a {
@@ -48,53 +49,44 @@ body {
     font-weight: bold;
     font-family: 'Poppins', sans-serif;
     display: block;
-    padding: 10px 15px;
+    padding: 10px;
     border-radius: 5px;
     transition: background-color 0.3s, transform 0.3s;
 }
 
 .sidebar ul li a:hover {
-    background-color: #3A3A3A; /* Darker hover color */
+    background-color: #3A3A3A;
     color: #ECECEC;
     transform: scale(1.05);
 }
 
 .content {
-    padding: 30px;
-    margin-left: 250px;
+    padding: 20px;
+    margin-top: 20px;
     flex: 1;
     background-color: #1B1B1B;
     overflow-y: auto;
-    box-sizing: border-box; /* Ensure padding is within bounds */
+    box-sizing: border-box;
+    transition: margin-top 0.3s ease;
 }
 
 section {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     opacity: 0;
     transform: translateY(20px);
     animation: fadeUp 0.7s ease forwards;
 }
 
-section:nth-child(2) {
-    animation-delay: 0.3s;
-}
-section:nth-child(3) {
-    animation-delay: 0.6s;
-}
-section:nth-child(4) {
-    animation-delay: 0.9s;
-}
-
 h2 {
     margin-top: 0;
     font-family: 'Poppins', sans-serif;
-    font-size: 1.8rem;
-    color: #4C9EEB; /* Light blue for section headers */
-    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: #4C9EEB;
+    margin-bottom: 1rem;
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     transform: scale(0.95);
     animation: popIn 0.5s ease forwards;
     color: #ECECEC;
@@ -109,32 +101,33 @@ label {
 
 select {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     border-radius: 5px;
     border: 1px solid #3A3A3A;
-    background-color: #2C2C2C; /* Slightly lighter background */
+    background-color: #2C2C2C;
     color: #ECECEC;
     font-size: 1rem;
     transition: border-color 0.3s;
-    box-sizing: border-box; /* Ensure padding is within bounds */
+    box-sizing: border-box;
 }
 
 select:focus {
-    border-color: #4C9EEB; /* Light blue focus color */
+    border-color: #4C9EEB;
     outline: none;
 }
 
 .buttons {
     margin-top: 20px;
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Stack buttons vertically on small screens */
+    align-items: center; /* Center buttons */
     animation: fadeIn 1s ease forwards;
 }
 
 button {
-    background-color: #4C9EEB; /* Light blue button */
+    background-color: #4C9EEB;
     color: white;
-    padding: 12px 25px;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -142,24 +135,25 @@ button {
     transition: background-color 0.3s, transform 0.3s;
     width: 100%;
     max-width: 200px;
+    margin-bottom: 10px;
 }
 
 button:hover {
-    background-color: #3A89CC; /* Darker blue on hover */
+    background-color: #3A89CC;
     transform: scale(1.05);
 }
 
 .reset-section {
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 20px;
     animation: fadeIn 1s ease forwards;
 }
 
 .result {
-    margin-top: 30px;
+    margin-top: 20px;
     padding: 15px;
-    background-color: #2C2C2C; /* Same background as sidebar */
+    background-color: #2C2C2C;
     border-radius: 5px;
     animation: fadeIn 1s ease;
     color: #ECECEC;
@@ -167,25 +161,25 @@ button:hover {
 
 #risk-level {
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-family: 'Poppins', sans-serif;
     margin-bottom: 10px;
 }
 
 .low {
-    color: #2ECC71; /* Green for low risk */
+    color: #2ECC71;
 }
 
 .medium {
-    color: #F39C12; /* Orange for medium risk */
+    color: #F39C12;
 }
 
 .high {
-    color: #E74C3C; /* Red for high risk */
+    color: #E74C3C;
 }
 
 .critical {
-    color: #C0392B; /* Dark red for critical risk */
+    color: #C0392B;
 }
 
 #vulnerability-list {
@@ -194,11 +188,79 @@ button:hover {
 }
 
 #vulnerability-list li {
-    margin: 15px 0;
+    margin: 10px 0;
     padding: 12px;
     background-color: #2C2C2C;
     border-radius: 5px;
     animation: fadeIn 0.7s ease forwards;
+}
+
+/* Media Queries for Smaller Devices */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        padding: 15px;
+    }
+
+    .sidebar h2 {
+        font-size: 1.3rem;
+    }
+
+    .content {
+        padding: 15px;
+        margin-top: 15px;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    select, button {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .sidebar h2 {
+        font-size: 1.2rem;
+    }
+
+    .content {
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    select, button {
+        padding: 8px;
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .sidebar h2 {
+        font-size: 1rem;
+    }
+
+    h2 {
+        font-size: 1.1rem;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    button {
+        padding: 7px;
+        font-size: 0.7rem;
+    }
+
+    select {
+        padding: 7px;
+        font-size: 0.7rem;
+    }
 }
 
 /* Animations */
@@ -232,4 +294,51 @@ button:hover {
 }
 
 
+    .form-group {
+        margin-bottom: 15px;
+    }
 
+    .buttons {
+        width: 100%;
+    }
+
+    button {
+        padding: 8px;
+        font-size: 0.8rem;
+    }
+
+    select {
+        padding: 8px;
+        font-size: 0.8rem;
+    }
+
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0.95);
+    }
+    to {
+        transform: scale(1);
+    }
+}
